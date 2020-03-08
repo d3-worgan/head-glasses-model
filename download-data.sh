@@ -8,8 +8,6 @@ python3 get-pip.py
 pip install tqdm
 pip install awscli
 
-git clone https://github.com/d3-worgan/oi-detection-training.git
-cd oi-detection-training
 wget https://storage.googleapis.com/openimages/2018_04/class-descriptions-boxable.csv
 wget https://storage.googleapis.com/openimages/2018_04/train/train-annotations-bbox.csv
 wget https://storage.googleapis.com/openimages/2018_04/validation/validation-annotations-bbox.csv
