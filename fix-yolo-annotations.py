@@ -20,13 +20,14 @@ with open(args["classes"], 'r+') as f:
 for c in classes:
     print(c)
 
+print("Fixing annotations for ")
 # Traverse and replace names
 for dirpath, dirnames, files in os.walk(args["location"]):
-    print(f'Found directory: {dirpath}')
+    print(f'Directory: {dirpath}')
     for file_name in files:
         file_path = os.path.join(dirpath, file_name)
         if '.txt' in file_path:
-            print(file_path)
+            #print(file_path)
 
             # Read info from file
             fin =  open(file_path, 'rt')
@@ -37,12 +38,12 @@ for dirpath, dirnames, files in os.walk(args["location"]):
             fin =  open(file_path, 'rt')
             line = fin.readline()
             line = line.rstrip('\n')
-            print(line)
+            #print(line)
             split = line.split(",")
 
             # Replace class names with indexes
             data = data.replace(split[0], str(classes.index(split[0])))
-            print(split[0] + " is index " + str(classes.index(split[0])) + " in classes.txt")
+            #print(split[0] + " is index " + str(classes.index(split[0])) + " in classes.txt")
             fin.close()
 
             # Overwrite file
