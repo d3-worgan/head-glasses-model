@@ -5,7 +5,7 @@ Coat
 Backpack
 Handbag
 Human head
-Counter top
+Countertop
 Table
 Coffee table
-Sofa
+Sofa bed
