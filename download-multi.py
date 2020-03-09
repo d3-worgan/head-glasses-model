@@ -28,7 +28,7 @@ run_mode = args.mode
 threads = args.nthreads
 class_descriptions = args.csv
 
-print("Threads used: " + threads)
+print("Threads used: " + str(threads))
 print("Classes to search for:")
 
 # Load the names of the requested classes
