@@ -3,7 +3,9 @@
 # Set up python pip
 sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo apt-get install python3-distutils
-python3 get-pip.py 
+python3 get-pip.py
+export PATH="/home/danielworgan91/.local/bin":$PATH
+echo 'export PATH="/home/danielworgan91/.local/bin":$PATH' >> ~/.bashrc
 
 pip install tqdm
 pip install awscli
