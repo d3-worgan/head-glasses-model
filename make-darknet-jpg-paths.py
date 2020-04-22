@@ -10,7 +10,7 @@ parser.add_argument("-d", "--directory", required=True, help="Path to base direc
 parser.add_argument("-t", "--target", required=True, help="Name of file to write paths")
 args = vars(parser.parse_args())
 
-assert os.path.exists(args["directory"]), "Path to base directory is invalid"
+assert os.path.exists(args["directory"]), args["directory"] + " Path to base directory is invalid"
 assert "." in args["target"], "Specify a txt file name like, hello.txt"
 assert args["target"].split(".")[1] == "txt"
 

@@ -1,5 +1,3 @@
-export PATH="/home/danielworgan91/.local/bin":$PATH
-echo 'export PATH="/home/danielworgan91/.local/bin":$PATH' >> ~/.bashrc
 
 # Download data from the open images dataset
 
@@ -17,8 +15,8 @@ wget https://storage.googleapis.com/openimages/2018_04/validation/validation-ann
 wget https://storage.googleapis.com/openimages/2018_04/test/test-annotations-bbox.csv
 
 # Make sure classes .txt has correct classes
-python3 download-multi.py --mode test --classes Glasses,Remote control,Mobile phone,Coat,Backpack,Handbag,Human head,Coffee table,Table,Sofa bed
-python3 download-multi.py --mode train --classes Glasses,Remote control,Mobile phone,Coat,Backpack,Handbag,Human head,Coffee table,Table,Sofa bed
+python3 download-multi-together.py --mode train --classes classes_1.txt
+python3 download-multi-together.py --mode validation --classes classes_1.txt
 
 python3 fix-yolo-annotations.py --classes classes.txt --location test
 python3 fix-yolo-annotations.py --classes classes.txt --location train
