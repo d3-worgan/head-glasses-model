@@ -29,6 +29,12 @@ threads = args.nthreads
 class_descriptions = args.csv
 max_annotations = args.max_annotations
 
+cwd = os.getcwd()
+dataset_d = os.path.join(cwd, 'dataset')
+if not os.path.exists(dataset_d):
+    os.mkdir(dataset_d)
+    assert os.path.exists(dataset_d)
+
 print(f"Threads used {threads}")
 
 # Load the names of the requested classes
@@ -96,12 +102,12 @@ for ind in range(0, len(classes)):
         num_annotations = num_annotations + 1
 
         # Add the image to the list of images to download later
-        command = f"aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/{run_mode}/{annotation[0]}.jpg {run_mode}/{annotation[0]}.jpg"
+        command = f"aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/{run_mode}/{annotation[0]}.jpg {dataset_d}/{run_mode}/{annotation[0]}.jpg"
         if command not in commands:
             commands.append(command)
         
         # Append the annotation to the corresponding image label
-        with open(f'{run_mode}/{annotation[0]}.txt', 'a') as f:
+        with open(f'{dataset_d}/{run_mode}/{annotation[0]}.txt', 'a') as f:
             f.writelines(f"{ind} {(float(annotation[5]) + float(annotation[4]))/2} {((float(annotation[7]) + float(annotation[6])) / 2)} {float(annotation[5]) - float(annotation[4])} {float(annotation[7]) - float(annotation[6])}\n")
 
         if i == len(class_annotations):

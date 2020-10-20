@@ -16,28 +16,16 @@ conda activate oi_model
 pip install tqdm
 pip install awscli
 ```
-2. Then run the setup script to download the OpenImages labels, meta-data and the Yolo_mark editor
+
+3. Then run the setup script to download the OpenImages labels, meta-data and the Yolo_mark editor
 ```
 python setup.py
-git clone https://github.com/AlexeyAB/Yolo_mark.git
-cd Yolo_mark
-cmake .
-make
-cd ..
-```
-
-
-2. Download the OpenImages label and meta-data
-```
-wget https://storage.googleapis.com/openimages/v5/class-descriptions-boxable.csv
-wget https://storage.googleapis.com/openimages/v6/oidv6-train-annotations-bbox.csv
-wget https://storage.googleapis.com/openimages/v5/validation-annotations-bbox.csv
-wget https://storage.googleapis.com/openimages/v5/test-annotations-bbox.csv
 ```
 
 ## Usage
 ### 1. Download the initial dataset
-1. Selecting from the list in the ```class-descriptions-boxable.csv```, specify the class names to download in the ```classes.txt``` file. The classes.txt should contain an example to overwrite. E.g. ```classes.txt```:
+1. Selecting from the list in the ```class-descriptions-boxable.csv```, specify the class names to download in 
+the ```classes.txt``` file. The classes.txt should contain an example to overwrite. E.g. ```classes.txt```:
 ```
 Human head
 Glasses
@@ -61,13 +49,12 @@ This will include examples where the object is occluded, see --help for more opt
 
 
 ### 2. Validate and fix the annotations
-OpenImages is partly produced by automation and so in much of the cases the labels are poor or missing. For this reason we still need to manually go through the data set and fix the labels.
+OpenImages is partly produced by automation and so in much of the cases the labels are poor or missing. 
+For this reason we need to manually go through the data set and fix / add the labels.
 
-1. Run this to load the dataset into the Yolo_mark bounding box editor
+1. Load the data we just downloaded into Yolo_mark
 ```
-rm x64/Release/data/img/*
-mv train/* Yolo_mark/x64/Release/data/img/
-cp classes.txt Yolo_mark/x64/Release/data/obj.names
+load_mark.py --mode train
 ```
 
 2. Then run Yolo_mark and go through each  image and fix them
