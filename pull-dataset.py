@@ -1,3 +1,7 @@
+"""
+Code adapted from https://github.com/spmallick/learnopencv/blob/master/downloadOpenImages/downloadOI.py
+"""
+
 import argparse
 import csv
 import subprocess
