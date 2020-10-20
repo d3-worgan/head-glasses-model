@@ -1,11 +1,3 @@
-Glasses
-Remote control
-Mobile phone
-Coat
-Backpack
-Handbag
-Human head
-Countertop
-Table
-Coffee table
-Sofa bed
+Footwear
+Lemon
+Tablet computer
