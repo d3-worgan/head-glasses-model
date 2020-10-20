@@ -1,5 +1,5 @@
 # OpenImages dataset pipeline
-This repo can be used to create custom object detection datasets for YOLO. It uses the OpenImages dataset to grab initial data we need. Unfortunatly the quality of OI is not the best and so manual annotation is required which is processed using Yolo Mark. Finally, once the dataset is clean and correct we can train the model in a darknet docker container either locally or in the cloud.
+Create custom object detection datasets for YOLO using the OpenImages dataset and Yolo_mark.
 
 
 ## Install (Linux)
