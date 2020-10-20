@@ -1,12 +1,12 @@
 # OpenImages dataset pipeline
-Create custom object detection datasets for YOLO using the OpenImages dataset and Yolo_mark.
+Create custom object detection datasets for [YOLO](https://github.com/AlexeyAB/darknet) using the [OpenImages](https://storage.googleapis.com/openimages/web/download.html) dataset and [Yolo_mark](https://github.com/AlexeyAB/Yolo_mark).
 
 
 ## Install (Linux)
-1. First clone the repository
+1. First clone this repository
 ```
 git clone https://github.com/d3-worgan/head-glasses-model.git
-cd head-glasses-model
+cd oi-dataset-pipe
 ```
 
 2. Setup a python enviornment, preferably with conda e.g.
@@ -25,23 +25,24 @@ python setup.py
 ## Usage
 ### 1. Download the initial dataset
 1. Selecting from the list in the ```class-descriptions-boxable.csv```, specify the class names to download in 
-the ```classes.txt``` file. The classes.txt should contain an example to overwrite. E.g. ```classes.txt```:
+the ```classes.txt``` file. E.g. 
+```classes.txt```:
 ```
 Human head
 Glasses
 ```
 
-2. Then run a command like:
+2. Then download the images and corresponding annotations by running a command like:
 ```
 python pull-dataset.py --mode train --classes.txt
 ```
 
-To limit the number of data use the ```--max_annotations``` to restrict how much data for each class
+Limit the number of annotations and images to download using the ```--max_annotations``` option. 
 ```
 python pull-dataset.py --mode train --classes.txt --max_annotations 10
 ```
 
-Pull dataset also has options for selecting more specific data e.g. 
+Pull dataset also has options for selecting more specific data from OpenImages e.g. 
 ```
 python pull-dataset.py --mode train --classes.txt --max_annotations 10 --occluded
 ```
