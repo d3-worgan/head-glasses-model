@@ -5,7 +5,7 @@ Create custom object detection datasets for [YOLO](https://github.com/AlexeyAB/d
 ## Install (Linux)
 1. First clone this repository
 ```
-git clone https://github.com/d3-worgan/head-glasses-model.git
+git clone https://github.com/d3-worgan/oi-dataset-pipe.git
 cd oi-dataset-pipe
 ```
 
