@@ -1,5 +1,5 @@
-# OpenImages dataset pipeline
-Create custom object detection datasets for [YOLO](https://github.com/AlexeyAB/darknet) using the [OpenImages](https://storage.googleapis.com/openimages/web/download.html) dataset and [Yolo_mark](https://github.com/AlexeyAB/Yolo_mark).
+# OpenImages & Yolo dataset pipeline
+Create custom object detection datasets for [YOLO](https://github.com/AlexeyAB/darknet) using the [OpenImages](https://storage.googleapis.com/openimages/web/download.html) dataset and [Yolo_mark](https://github.com/AlexeyAB/Yolo_mark) bounding box editor.
 
 
 ## Install (Linux)
