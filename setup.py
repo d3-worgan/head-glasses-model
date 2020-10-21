@@ -34,5 +34,5 @@ subprocess.run(['wget', 'https://storage.googleapis.com/openimages/v6/oidv6-trai
 subprocess.run(['wget', 'https://storage.googleapis.com/openimages/v5/validation-annotations-bbox.csv'])
 subprocess.run(['wget', 'https://storage.googleapis.com/openimages/v5/test-annotations-bbox.csv'])
 
-os.rename(os.path.join(os.getcwd(), 'open_images', 'oidv6-train-annotations-bbox.csv'),
-          os.path.join(os.getcwd(), 'open_images', 'train-annotations-bbox.csv'))
+os.rename(os.path.join(os.getcwd(), 'oidv6-train-annotations-bbox.csv'),
+          os.path.join(os.getcwd(), 'train-annotations-bbox.csv'))
