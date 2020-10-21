@@ -27,7 +27,7 @@ wget https://storage.googleapis.com/openimages/v5/test-annotations-bbox.csv
 ```
 """
 if not os.path.exists('open_images'):
-          os.mkdir('open_images')
+  os.mkdir('open_images')
 os.chdir('open_images')
 subprocess.run(['wget', 'https://storage.googleapis.com/openimages/v5/class-descriptions-boxable.csv'])
 subprocess.run(['wget', 'https://storage.googleapis.com/openimages/v6/oidv6-train-annotations-bbox.csv'])
