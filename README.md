@@ -34,7 +34,7 @@ Glasses
 
 2. Then download the images and corresponding annotations by running a command like:
 ```
-python pull-dataset.py --mode train --classes.txt
+python pull-dataset.py --mode train --classes classes.txt
 ```
 
 Limit the number of annotations and images to download using the ```--max_annotations``` option. 
@@ -54,7 +54,7 @@ For this reason we need to manually go through the data set and fix / add the la
 
 1. Load the data we just downloaded into Yolo_mark
 ```
-load_mark.py --mode train
+python load_mark.py --mode train
 ```
 
 2. Then run Yolo_mark and go through each  image and fix them
@@ -72,15 +72,15 @@ mv x64/Release/data/img/* ../dataset/train/
 E.g.
 ```
 cd ../
-python pull-dataset.py --mode validation --classes.txt
-load_mark.py --mode validation
+python pull-dataset.py --mode validation --classes classes.txt
+python load_mark.py --mode validation
 cd Yolo_mark
 sh linux_mark.sh
 mv x64/Release/data/img/* ../dataset/validation/
 
 cd ../
-python pull-dataset.py --mode test --classes.txt
-load_mark.py --mode test
+python pull-dataset.py --mode test --classes classes.txt
+python load_mark.py --mode test
 cd Yolo_mark
 sh linux_mark.sh
 mv x64/Release/data/img/* ../dataset/test/
@@ -91,5 +91,6 @@ Now that we have the data and the labels have been validated, we can finalise th
 dataset and generate a standard configuration for training with yolo.
 
 ```
-python finalise.py --datasetname mydataset
+cd ../
+python finalise.py --name mydataset
 ```

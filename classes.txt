@@ -1,3 +1,9 @@
-Tortoise
-Magpie
-Sea turtle
+Glasses
+Human nose
+Human hand
+Human eye
+Human mouth
+Human ear
+Human hair
+Human head
+Human arm
