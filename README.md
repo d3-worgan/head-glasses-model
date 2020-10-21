@@ -69,8 +69,27 @@ mv x64/Release/data/img/* ../dataset/train/
 ```
 
 ### 3. Repeat steps 1 and 2 for the validation and test sets (if required)
+E.g.
+```
+cd ../
+python pull-dataset.py --mode validation --classes.txt
+load_mark.py --mode validation
+cd Yolo_mark
+sh linux_mark.sh
+mv x64/Release/data/img/* ../dataset/validation/
+
+cd ../
+python pull-dataset.py --mode test --classes.txt
+load_mark.py --mode test
+cd Yolo_mark
+sh linux_mark.sh
+mv x64/Release/data/img/* ../dataset/test/
+```
 
 ### 4. Finalise the dataset and prepare for training with darknet
 Now that we have the data and the labels have been validated, we can finalise that 
 dataset and generate a standard configuration for training with yolo.
-1. 
+
+```
+python finalise.py --datasetname mydataset
+```
