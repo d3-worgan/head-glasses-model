@@ -4,3 +4,5 @@ oidv6-train-annotations-bbox.csv
 test-annotations-bbox.csv
 validation-annotations-bbox.csv
 .idea
+dataset/
+open_images/

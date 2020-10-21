@@ -9,7 +9,7 @@ git clone https://github.com/d3-worgan/head-glasses-model.git
 cd oi-dataset-pipe
 ```
 
-2. Setup a python enviornment, preferably with conda e.g.
+2. Setup a python environment, preferably with conda e.g.
 ```
 conda create -y -n oi_model python=3.6
 conda activate oi_model
@@ -42,16 +42,15 @@ Limit the number of annotations and images to download using the ```--max_annota
 python pull-dataset.py --mode train --classes.txt --max_annotations 10
 ```
 
-Pull dataset also has options for selecting more specific data from OpenImages e.g. 
+Pull dataset also has options for selecting more specific data from OpenImages e.g. (see --help for more info)
 ```
 python pull-dataset.py --mode train --classes.txt --max_annotations 10 --occluded
 ```
-This will include examples where the object is occluded, see --help for more options.
 
 
 ### 2. Validate and fix the annotations
 OpenImages is partly produced by automation and so in much of the cases the labels are poor or missing. 
-For this reason we need to manually go through the data set and fix / add the labels.
+For this reason we need to manually go through the data set and fix / add the labels if necessary.
 
 1. Load the data we just downloaded into Yolo_mark
 ```
@@ -66,9 +65,12 @@ sh linux_mark.sh
 
 3. When the labels are finished move the data back to root directory
 ```
-mv x64/Release/data/img/* ../train/
+mv x64/Release/data/img/* ../dataset/train/
 ```
 
 ### 3. Repeat steps 1 and 2 for the validation and test sets (if required)
 
-### 4. Now we can train a detection model using darknet
+### 4. Finalise the dataset and prepare for training with darknet
+Now that we have the data and the labels have been validated, we can finalise that 
+dataset and generate a standard configuration for training with yolo.
+1. 

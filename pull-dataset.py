@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(description='Download Class specific images fro
 parser.add_argument("--mode", help="Dataset category - train, validation or test", required=True)
 parser.add_argument("--classes", help="Specify names like cat,dog, or specify a .txt file with class names", required=True)
 parser.add_argument("--max_annotations", help="Specify a max number of annotations for each class", required=False, type=int, default=10)
-parser.add_argument("--csv", help="Location of the class-descriptions-boxable.csv", required=False, type=str, default='./class-descriptions-boxable.csv')
+parser.add_argument("--csv", help="Location of the class-descriptions-boxable.csv", required=False, type=str, default='./open_images/class-descriptions-boxable.csv')
 parser.add_argument("--nthreads", help="Number of threads to use", required=False, type=int, default=cpu_count*2)
 parser.add_argument("--occluded", help="Include occluded images", required=False, type=int, default=1)
 parser.add_argument("--truncated", help="Include truncated images", required=False, type=int, default=1)
@@ -32,6 +32,7 @@ run_mode = args.mode
 threads = args.nthreads
 class_descriptions = args.csv
 max_annotations = args.max_annotations
+assert max_annotations > 0, "Max annotations must be greater than 0"
 
 cwd = os.getcwd()
 dataset_d = os.path.join(cwd, 'dataset')
@@ -39,7 +40,8 @@ if not os.path.exists(dataset_d):
     os.mkdir(dataset_d)
     assert os.path.exists(dataset_d)
 
-print(f"Threads used {threads}")
+assert os.path.exists(os.path.join(cwd, 'open_images', f"{run_mode}-annotations-bbox.csv")), f"You need to download the {run_mode}-annotations-bbox.csv into open_images/"
+assert os.path.exists(os.path.join(cwd, 'open_images', 'class-descriptions-boxable.csv')), f"You need to download the class-descriptions-boxable.csv into open_images/"
 
 # Load the names of the requested classes
 classes = []
@@ -64,11 +66,17 @@ with open(class_descriptions, mode='r') as infile:
     reader = csv.reader(infile)
     download_labels = {rows[1]:rows[0] for rows in reader}
 
-subprocess.run(['rm', '-rf', run_mode])
-subprocess.run([ 'mkdir', run_mode])
+subprocess.run(['rm', '-rf', os.path.join(cwd, 'dataset', run_mode)])
+subprocess.run(['mkdir', os.path.join(cwd, 'dataset', run_mode)])
+assert os.path.exists(os.path.join(cwd, 'dataset', run_mode))
 
+print(f"Threads used {threads}")
+
+# Download each of the corresponding images
 pool = thread_pool(threads)
 commands = []
+
+# Total number of bounding boxes
 num_annotations = 0
 
 # Iterate class names specified by the user
@@ -77,8 +85,8 @@ for ind in range(0, len(classes)):
     print(f"Class {ind}: {class_name}")
         
     # Grab each label from the annotations file for the current class
-    command = f"grep {download_labels[class_name.replace('_', ' ')]} ./{run_mode}-annotations-bbox.csv"
-    print(command)
+    command = f"grep {download_labels[class_name.replace('_', ' ')]} ./open_images/{run_mode}-annotations-bbox.csv"
+    # print(command)
     class_annotations = subprocess.run(command.split(), stdout=subprocess.PIPE).stdout.decode('utf-8')
     class_annotations = class_annotations.splitlines()
     print(f"{len(class_annotations)} for {class_name}")
@@ -86,24 +94,24 @@ for ind in range(0, len(classes)):
     for i in range(max_annotations):
         annotation = class_annotations[i].split(',')
         
-        #IsOccluded,IsTruncated,IsGroupOf,IsDepiction,IsInside
-        if (args.occluded==0 and int(annotation[8])>0):
-            print("Skipped %s",annotation[0])
+        # IsOccluded,IsTruncated,IsGroupOf,IsDepiction,IsInside
+        if args.occluded == 0 and int(annotation[8]) > 0:
+            print("Skipped %s", annotation[0])
             continue
-        if (args.truncated==0 and int(annotation[9])>0):
-            print("Skipped %s",annotation[0])
+        if args.truncated == 0 and int(annotation[9]) > 0:
+            print("Skipped %s", annotation[0])
             continue
-        if (args.groupOf==0 and int(annotation[10])>0):
-            print("Skipped %s",annotation[0])
+        if args.groupOf == 0 and int(annotation[10]) > 0:
+            print("Skipped %s", annotation[0])
             continue
-        if (args.depiction==0 and int(annotation[11])>0):
-            print("Skipped %s",annotation[0])
+        if args.depiction == 0 and int(annotation[11]) > 0:
+            print("Skipped %s", annotation[0])
             continue
-        if (args.inside==0 and int(annotation[12])>0):
-            print("Skipped %s",annotation[0])
+        if args.inside == 0 and int(annotation[12]) > 0:
+            print("Skipped %s", annotation[0])
             continue
 
-        num_annotations = num_annotations + 1
+        num_annotations += 1
 
         # Add the image to the list of images to download later
         command = f"aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/{run_mode}/{annotation[0]}.jpg {dataset_d}/{run_mode}/{annotation[0]}.jpg"
