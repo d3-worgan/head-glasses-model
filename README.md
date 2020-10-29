@@ -94,3 +94,5 @@ dataset and generate a standard configuration for training with yolo.
 cd ../
 python finalise.py --name mydataset
 ```
+
+The mydataset directory can now be passed to Darknet for training a custom model.
